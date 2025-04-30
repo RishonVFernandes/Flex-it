@@ -1,20 +1,20 @@
-import { useState } from "react";
 import "./App.css";
-import CubeFace from "./components/CubeFace/CubeFace";
-import Navbar from "./components/Navbar/Navbar";
+import {Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
-import { SidebarProvider } from "./context/SidebarContext";
+import UsersPage from "./pages/Users/UsersPage";
+import MainLayout from "./layouts/MainLayout/MainLayout";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
     return (
         <>
-            <SidebarProvider>
-                <div>
-                    <Navbar />
-                    
-                    <Home />
-                </div>
-            </SidebarProvider>
+            <Routes>
+                <Route path="/login" element={<LoginPage/>}></Route>
+                <Route path="/" element={<MainLayout/>}>
+                    <Route path="home" element={<Home/>} />
+                    <Route path="user" element={<UsersPage/>} />
+                </Route>
+            </Routes>
         </>
     );
 }
