@@ -26,7 +26,6 @@ const Home = () => {
                 <button className="btn-primary text-white">Click Me</button>
             </div>
             <div className="polygon w-100 h-100 bg-blue-800"></div>
-            <Sidebar/>
         </>
     );
 };

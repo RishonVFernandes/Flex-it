@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { closeSidebar } from "../../store/sidebarSlice";
+import { Link } from "react-router-dom";
 const Sidebar = () => {
     // const { isOpen, toggleSidebar } = useSidebar();
 
@@ -24,12 +25,12 @@ const Sidebar = () => {
                         </button>
                     </div>
                     <ul className="bg-blue-600 flex flex-col items-center pt-2">
-                        <li className="text-white w-full py-2 text-center hover:bg-blue-500">
-                            Products
-                        </li>
-                        <li className="text-white w-full py-2 text-center hover:bg-blue-500">
-                            Pokemon
-                        </li>
+                        <Link to={'/todo'} className="text-white w-full py-2 text-center hover:bg-blue-500">
+                            My Todo
+                        </Link>
+                        <Link to={'/chat'} className="text-white w-full py-2 text-center hover:bg-blue-500">
+                            Chat
+                        </Link>
                         <li className="text-white w-full py-2 text-center hover:bg-blue-500">
                             Services
                         </li>

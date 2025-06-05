@@ -12,7 +12,7 @@ import { SidebarProvider } from "./context/SidebarContext.tsx";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
-    <StrictMode>
+    // <StrictMode>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
                 <Provider store={store}>
@@ -22,5 +22,5 @@ createRoot(document.getElementById("root")!).render(
                 </Provider>
             </QueryClientProvider>
         </BrowserRouter>
-    </StrictMode>
+    // </StrictMode>
 );
