@@ -2,45 +2,27 @@ import { Suspense, useEffect, useState } from "react";
 import { toggleSidebar } from "../../store/sidebarSlice";
 import { useDispatch } from "react-redux";
 import { Canvas } from "@react-three/fiber";
-// import { OrbitControls, Stats } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 // import Buttons from "../../components/NewCube/Buttons.tsx";
 import SolvedCube from "../../components/NewCube/SolvedCube.tsx";
 import CubeScene1 from "../../components/NewCube/CubeScene1.tsx";
 import CubeScene2 from "../../components/NewCube/CubeScene2.tsx";
 import CubeScene3 from "../../components/NewCube/CubeScene3.tsx";
 import CubeScene4 from "../../components/NewCube/CubeScene4.tsx";
+import CubeScene5 from "../../components/NewCube/CubeScene5.tsx";
+import CubeScene6 from "../../components/NewCube/CubeScene6.tsx";
+import CubeScene7 from "../../components/NewCube/CubeScene7.tsx";
+import CubeScene8 from "../../components/NewCube/CubeScene8.tsx";
+import CubeScene9 from "../../components/NewCube/CubeScene9.tsx";
+import CubeScene10 from "../../components/NewCube/CubeScene10.tsx";
 
-const scenes = [CubeScene4, CubeScene3, CubeScene2, CubeScene1, SolvedCube];
-// console.log({PrevioCube, PreviCube, PrevCube, PreCube, Cube})
+// R',U',R,U,F',L',D,R,B2,U,D
+const scenes = [CubeScene10, CubeScene9, CubeScene8, CubeScene7, CubeScene6, CubeScene5, CubeScene4, CubeScene3, CubeScene2, CubeScene1, SolvedCube];
+
 const PortfolioPage = () => {
     const dispatch = useDispatch();
 
-    // const scrollTimeout = useRef<number | null>(null);
     const [index, setIndex] = useState(0);
-
-    // useEffect(() => {
-    //     const handleScroll = (e: WheelEvent) => {
-    //         e.preventDefault();
-    //         if (scrollTimeout.current) return;
-
-    //         scrollTimeout.current = setTimeout(() => {
-    //             setIndex((prev: number) => {
-    //                 if (e.deltaY > 0) {
-    //                     return Math.min(prev + 1, scenes.length - 1);
-    //                 } else {
-    //                     return Math.max(prev - 1, 0);
-    //                 }
-    //             });
-    //             scrollTimeout.current = null;
-    //         }, 500);
-    //     };
-    //     window.addEventListener("wheel", handleScroll, { passive: false });
-    //     return () => window.removeEventListener("wheel", handleScroll);
-    // }, []);
-
-    // let CurrentScene = scenes[index];
-    // if (CurrentScene >= scenes[scenes.length]) CurrentScene = Cube;
-    // const totalScenes = scenes.length;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -69,7 +51,7 @@ const PortfolioPage = () => {
     const CurrentScene = scenes[index];
     return (
         <>
-            <header className="bg-black">
+            <header className="bg-black sticky top-0 z-10">
                 <div className="flex justify-between items-center bg-blue-400 h-15 px-5">
                     <div>LOGO</div>
                     <nav className="">
@@ -91,55 +73,27 @@ const PortfolioPage = () => {
                     </div>
                 </div>
             </header>
-            <main className="flex h-full bg-gray-700 ">
-                <div className="w-150  h-100 bg-gray-800 fixed top-0">
+            <main className=" h-200 bg-gray-800 relative p-3 ">
+                <div className="w-150 h-100 bg-gray-800 ">
                     <Canvas camera={{ position: [5, 5, 5], fov: 60 }}>
                         <ambientLight intensity={0.5} />
                         <pointLight position={[10, 10, 10]} />
                         <Suspense fallback={null}>
                             {/* <Environment preset="forest" /> */}
                         </Suspense>
-                        <CurrentScene />
-                        {/* <Cube/> */}
-                        {/* <OrbitControls /> */}
-                        {/* <Stats /> */}
+                        {/* <CurrentScene /> */}
+                        <CubeScene10/>
+                        <OrbitControls/>
                     </Canvas>
                 </div>
-                <div
-                    style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        padding: "8px",
-                        background: "rgba(0, 0, 0, 0.6)",
-                        color: "lime",
-                        fontSize: "14px",
-                        zIndex: 1000,
-                        fontFamily: "monospace",
-                    }}
-                >
-                    ScrollY: {scrollY}px
-                    <br />
-                    Scene Index: {index}
-                </div>
-                {/* <div className="w-50 text-2xl font-bold text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptate quasi culpa ducimus dignissimos dolore qui illo
-                    corporis architecto iusto rerum consequuntur voluptatibus
-                    explicabo, ipsa suscipit animi voluptatum in sed officia
-                    praesentium at eaque quam. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Neque eius mollitia tempore
-                    laborum omnis similique maxime assumenda quae qui voluptas,
-                    facilis eveniet ducimus, numquam aperiam quod quis
-                    necessitatibus minus. Obcaecati error, optio accusamus sint
-                    possimus non quam, nesciunt quisquam iste tempora itaque
-                    asperiores atque, voluptatum laudantium sit animi unde.
-                    Assumenda aspernatur molestiae ad ab quaerat, rem dicta,
-                    vero voluptates sit, necessitatibus cupiditate totam
-                    repellendus repudiandae dolores. Assumenda magnam laboriosam
-                    dolor? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam laboriosam nulla iste ducimus perspiciatis iure quaerat quod laudantium impedit aspernatur asperiores et amet delectus quis repudiandae, unde esse consequuntur expedita sint dolorum ipsa mollitia neque soluta recusandae! Eius in repellat laborum illum sapiente aut ipsa, debitis vitae omnis numquam, rerum sit minus at dolore sunt eveniet.
+                
+                {/* <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-99">
+                    Welcome to my Website Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro aspernatur nam veritatis accusamus ex facere, neque repellat suscipit repudiandae et cumque harum perspiciatis nemo fugiat labore voluptatem aut libero ab eius explicabo officiis, dignissimos eveniet quod ipsum. Perferendis ullam nulla dolor assumenda rem voluptates nostrum.
                 </div> */}
-                <div className="h-500 w-500 bg-gray-900">
+                <Canvas>
+
+                </Canvas>
+                {/* <div className="h-500 w-500 bg-transparent z-99">
                     <div style={{ height: '50px' }}>
                         {[...Array(5)].map((_, i) => (
                             <section
@@ -160,7 +114,7 @@ const PortfolioPage = () => {
                             </section>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </main>
             <footer></footer>
         </>
