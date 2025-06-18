@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { toggleSidebar } from "../../store/sidebarSlice";
 import { useDispatch } from "react-redux";
 import { Canvas } from "@react-three/fiber";
@@ -17,17 +17,40 @@ import CubeScene9 from "../../components/NewCube/CubeScene9.tsx";
 import CubeScene10 from "../../components/NewCube/CubeScene10.tsx";
 
 // R',U',R,U,F',L',D,R,B2,U,D
-const scenes = [CubeScene10, CubeScene9, CubeScene8, CubeScene7, CubeScene6, CubeScene5, CubeScene4, CubeScene3, CubeScene2, CubeScene1, SolvedCube];
+const scenes = [
+    CubeScene10,
+    CubeScene9,
+    CubeScene8,
+    CubeScene7,
+    CubeScene6,
+    CubeScene5,
+    CubeScene4,
+    CubeScene3,
+    CubeScene2,
+    CubeScene1,
+    SolvedCube,
+];
 
 const PortfolioPage = () => {
     const dispatch = useDispatch();
 
+    const canvasRef = useRef(null);
+    // useEffect(() => {
+    //     const canvas = canvasRef.current;
+    //     if(!canvas) return
+
+    //     const context = canvas.getContext('2d');
+
+    //     context.fillStyle = '#000000'
+    // })
+
     const [index, setIndex] = useState(0);
+    // const [isSolved, setIsSolved] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             const totalScenes = scenes.length;
-            const sectionHeight = window.innerHeight * 0.25; // 50vh in pixels
+            const sectionHeight = window.innerHeight * (1/4); // 50vh in pixels
             const totalHeight = sectionHeight * totalScenes;
 
             // Compute a scroll ratio from 0 to 1
@@ -48,6 +71,21 @@ const PortfolioPage = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const phrases = [
+        "Hello this is Rishon V Fernandes",
+        "Welcome to my Website",
+        "Enjoy the animation",
+        "Take a look",
+        "at my website",
+        "I am a web developer",
+        "And i love pokemon"
+    ]
+
+    // if (index < 6) {
+    //     setIsSolved(false);
+    // } else {
+    //     setIsSolved(true);
+    // }
     const CurrentScene = scenes[index];
     return (
         <>
@@ -73,48 +111,56 @@ const PortfolioPage = () => {
                     </div>
                 </div>
             </header>
-            <main className=" h-200 bg-gray-800 relative p-3 ">
-                <div className="w-150 h-100 bg-gray-800 ">
-                    <Canvas camera={{ position: [5, 5, 5], fov: 60 }}>
+            <main className=" h-200 bg-gray-800 relative p-10 ">
+                <div className="w-150 h-100  fixed right-0 z-11">
+                    
+                    <Canvas
+                        camera={{ position: [5, 5, 5], fov: 60 }}
+                        ref={canvasRef}
+                    >
                         <ambientLight intensity={0.5} />
                         <pointLight position={[10, 10, 10]} />
                         <Suspense fallback={null}>
                             {/* <Environment preset="forest" /> */}
                         </Suspense>
-                        {/* <CurrentScene /> */}
-                        <CubeScene10/>
-                        <OrbitControls/>
+                        <CurrentScene />
+                        {/* <CubeScene10/> */}
+                        {/* <OrbitControls /> */}
                     </Canvas>
+                    
                 </div>
-                
-                {/* <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-99">
-                    Welcome to my Website Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro aspernatur nam veritatis accusamus ex facere, neque repellat suscipit repudiandae et cumque harum perspiciatis nemo fugiat labore voluptatem aut libero ab eius explicabo officiis, dignissimos eveniet quod ipsum. Perferendis ullam nulla dolor assumenda rem voluptates nostrum.
+                {/* <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-90">
+                    Hello ,THis is Rishon V Fernandes
+                </div>
+                <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-99">
+                    Welcome to my Website Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Porro aspernatur nam veritatis accusamus
+                    ex facere, neque repellat suscipit repudiandae et cumque
+                    harum perspiciatis nemo fugiat labore voluptatem aut libero
+                    ab eius explicabo officiis, dignissimos eveniet quod ipsum.
+                    Perferendis ullam nulla dolor assumenda rem voluptates
+                    nostrum.
                 </div> */}
-                <Canvas>
 
-                </Canvas>
-                {/* <div className="h-500 w-500 bg-transparent z-99">
-                    <div style={{ height: '50px' }}>
-                        {[...Array(5)].map((_, i) => (
+                <div className="bg-gray-700 z-99">
+                    <div style={{ height: '60px' }}>
+                        {phrases.map((_, i) => (
                             <section
                                 key={i}
                                 style={{
-                                    height: "50vh",
+                                    height: "90vh",
                                     borderBottom: "1px solid #ccc",
                                 }}
                             >
                                 <h1
-                                    style={{
-                                        textAlign: "center",
-                                        paddingTop: "20vh",
-                                    }}
+                                    className="w-100 h-50 text-6xl font-bold text-gray-500 z-90"
                                 >
-                                    Scroll Section {i + 1}
+                                    {phrases[i]}
                                 </h1>
                             </section>
                         ))}
                     </div>
-                </div> */}
+                </div>
             </main>
             <footer></footer>
         </>

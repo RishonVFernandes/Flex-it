@@ -8,6 +8,7 @@ import TodosPage from "./pages/TodosPage/TodosPage";
 import AnimationsPage from "./pages/Animations/AnimationsPage.tsx";
 import ChatPage from "./pages/ChatPage/ChatPage.tsx";
 import PortfolioPage from "./pages/PortfolioPage/PortfolioPage.tsx";
+import Sudoku from "./pages/Game/Sudoku.tsx";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="todo" element={<TodosPage/>} />
                     <Route path="chat" element={<ChatPage/>} />
                     <Route path="animation" element={<AnimationsPage/>} />
+                    <Route path="play" element={<Sudoku/>} />
                 </Route>
             </Routes>
         </>

@@ -8,19 +8,19 @@ const CubeScene9 = () => {
     const backLayerRef = useRef<Group>(null);
     const centerLayerRef = useRef<Group>(null);
 
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         if (!frontLayerRef.current) return;
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (!backLayerRef.current) return;
 
-    //         gsap.to(frontLayerRef.current.rotation, {
-    //             z: frontLayerRef.current.rotation.z + Math.PI / 2,
-    //             duration: 0.4,
-    //             ease: "power2.inOut",
-    //         });
-    //     }, 400);
+            gsap.to(backLayerRef.current.rotation, {
+                z: backLayerRef.current.rotation.z + Math.PI,
+                duration: 0.4,
+                ease: "power2.inOut",
+            });
+        }, 400);
 
-    //     return () => clearTimeout(timeout);
-    // });
+        return () => clearTimeout(timeout);
+    });
     return (
         <>
             <group ref={frontLayerRef}>
