@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import Cubelet from "./Cubelet";
 import { Group } from "three";
+import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 
 const SolvedCube = () => {
@@ -9,6 +10,53 @@ const SolvedCube = () => {
     const leftLayerRef = useRef<Group>(null);
     const centerLayerRef = useRef<Group>(null);
     const cubeRef = useRef<Group>(null);
+    const lastScrollY = useRef<number>(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const delta = lastScrollY.current - window.scrollY;
+            lastScrollY.current = window.scrollY;
+            if (!cubeRef.current) return;
+
+            if(delta > 0 && cubeRef.current){
+                gsap.to(cubeRef.current.rotation, {
+                    // x: cubeRef.current.rotation.x + Math.PI / 2,
+                    // y: cubeRef.current.rotation.y + Math.PI ,
+                    x: cubeRef.current.rotation.x + Math.PI / 2,
+                    // z: cubeRef.current.rotation.z + Math.PI / 2,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                });
+                gsap.to(cubeRef.current.rotation, {
+                    // x: cubeRef.current.rotation.x + Math.PI / 2,
+                    y: cubeRef.current.rotation.y + Math.PI /5,
+                    // x: cubeRef.current.rotation.x + Math.PI / 2,
+                    // z: cubeRef.current.rotation.z + Math.PI / 2,
+                    duration: 1.0,
+                    ease: "power2.inOut",
+                });
+                gsap.to(cubeRef.current.rotation, {
+                    // x: cubeRef.current.rotation.x + Math.PI / 2,
+                    // y: cubeRef.current.rotation.y + Math.PI ,
+                    // x: cubeRef.current.rotation.x + Math.PI / 2,
+                    z: cubeRef.current.rotation.z + Math.PI / 2,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                });
+            }
+            // const timeout = setTimeout(() => {
+
+            //     if (!cubeRef.current) return;
+            
+                
+            // }, 400)
+            // return () => clearTimeout(timeout)
+
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    })
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -16,15 +64,23 @@ const SolvedCube = () => {
             if (!cubeRef.current) return;
         
             gsap.to(cubeRef.current.rotation, {
-                // x: cubeRef.current.rotation.x + Math.PI / 2,
-                y: cubeRef.current.rotation.y + Math.PI * 4,
-                duration: 2.4,
+                y: cubeRef.current.rotation.y - Math.PI * 2,
+                duration: 0.8,
                 ease: "power2.inOut",
             });
-        }, 400)
+        }, 50)
 
         return () => clearTimeout(timeout)
     })
+
+    // useFrame(() => {
+    //     if (!cubeRef.current) return;
+
+    //     const scrollTop = window.scrollY;
+    //     cubeRef.current.rotation.y = scrollTop * 0.001
+    //     cubeRef.current.rotation.z = scrollTop * 0.001
+    //     cubeRef.current.rotation.x = scrollTop * 0.001
+    // })
 
     return (
         // This cube is correct

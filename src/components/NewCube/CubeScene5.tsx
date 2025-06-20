@@ -14,10 +14,10 @@ const CubeScene5 = () => {
 
             gsap.to(frontLayerRef.current.rotation, {
                 z: frontLayerRef.current.rotation.z + Math.PI / 2,
-                duration: 0.4,
+                duration: 0.8,
                 ease: "power2.inOut",
             });
-        }, 400);
+        }, 50);
 
         return () => clearTimeout(timeout);
     });

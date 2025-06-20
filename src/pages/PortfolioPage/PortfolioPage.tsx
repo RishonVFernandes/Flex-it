@@ -2,8 +2,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { toggleSidebar } from "../../store/sidebarSlice";
 import { useDispatch } from "react-redux";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-// import Buttons from "../../components/NewCube/Buttons.tsx";
+// import { OrbitControls } from "@react-three/drei";
 import SolvedCube from "../../components/NewCube/SolvedCube.tsx";
 import CubeScene1 from "../../components/NewCube/CubeScene1.tsx";
 import CubeScene2 from "../../components/NewCube/CubeScene2.tsx";
@@ -35,14 +34,6 @@ const PortfolioPage = () => {
     const dispatch = useDispatch();
 
     const canvasRef = useRef(null);
-    // useEffect(() => {
-    //     const canvas = canvasRef.current;
-    //     if(!canvas) return
-
-    //     const context = canvas.getContext('2d');
-
-    //     context.fillStyle = '#000000'
-    // })
 
     const [index, setIndex] = useState(0);
     // const [isSolved, setIsSolved] = useState(false);
@@ -50,7 +41,7 @@ const PortfolioPage = () => {
     useEffect(() => {
         const handleScroll = () => {
             const totalScenes = scenes.length;
-            const sectionHeight = window.innerHeight * (1/4); // 50vh in pixels
+            const sectionHeight = window.innerHeight * (1 / 4); // 50vh in pixels
             const totalHeight = sectionHeight * totalScenes;
 
             // Compute a scroll ratio from 0 to 1
@@ -62,31 +53,37 @@ const PortfolioPage = () => {
                 totalScenes - 1,
                 Math.floor(scrollProgress * totalScenes)
             );
-
-            setIndex(newIndex);
+            // console.log(scrollY)
+            if (index < 10) {
+                setIndex(newIndex);
+            } else {
+                setIndex(10);
+                if (scrollY == 0) {
+                    setTimeout(() => {
+                        setIndex(0);
+                        console.log('hello')
+                    }, 1000);
+                }
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [index]);
 
     const phrases = [
         "Hello this is Rishon V Fernandes",
         "Welcome to my Website",
         "Enjoy the animation",
-        "Take a look",
+        "Have a look",
         "at my website",
         "I am a web developer",
-        "And i love pokemon"
-    ]
+        "And i love pokemon",
+    ];
 
-    // if (index < 6) {
-    //     setIsSolved(false);
-    // } else {
-    //     setIsSolved(true);
-    // }
     const CurrentScene = scenes[index];
+
     return (
         <>
             <header className="bg-black sticky top-0 z-10">
@@ -113,7 +110,6 @@ const PortfolioPage = () => {
             </header>
             <main className=" h-200 bg-gray-800 relative p-10 ">
                 <div className="w-150 h-100  fixed right-0 z-11">
-                    
                     <Canvas
                         camera={{ position: [5, 5, 5], fov: 60 }}
                         ref={canvasRef}
@@ -127,7 +123,6 @@ const PortfolioPage = () => {
                         {/* <CubeScene10/> */}
                         {/* <OrbitControls /> */}
                     </Canvas>
-                    
                 </div>
                 {/* <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-90">
                     Hello ,THis is Rishon V Fernandes
@@ -143,7 +138,7 @@ const PortfolioPage = () => {
                 </div> */}
 
                 <div className="bg-gray-700 z-99">
-                    <div style={{ height: '60px' }}>
+                    <div style={{ height: "60px" }}>
                         {phrases.map((_, i) => (
                             <section
                                 key={i}
@@ -152,9 +147,7 @@ const PortfolioPage = () => {
                                     borderBottom: "1px solid #ccc",
                                 }}
                             >
-                                <h1
-                                    className="w-100 h-50 text-6xl font-bold text-gray-500 z-90"
-                                >
+                                <h1 className="w-100 h-50 text-6xl font-bold text-gray-500 z-90">
                                     {phrases[i]}
                                 </h1>
                             </section>

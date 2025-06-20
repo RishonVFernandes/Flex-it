@@ -16,10 +16,10 @@ const CubeScene7 = () => {
 
             gsap.to(bottomLayerRef.current.rotation, {
                 y: bottomLayerRef.current.rotation.y + Math.PI / 2,
-                duration: 0.4,
+                duration: 0.8,
                 ease: "power2.inOut",
             });
-        }, 400)
+        }, 50)
 
         return () => clearTimeout(timeout)
     }, []);

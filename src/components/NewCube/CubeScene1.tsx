@@ -16,10 +16,10 @@ const CubeScene1 = () => {
         
             gsap.to(rightLayerRef.current.rotation, {
                 x: rightLayerRef.current.rotation.x + Math.PI / 2,
-                duration: 0.4,
+                duration: 0.8,
                 ease: "power2.inOut",
             });
-        }, 400)
+        }, 50)
 
         return () => clearTimeout(timeout)
     })
