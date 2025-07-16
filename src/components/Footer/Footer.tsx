@@ -1,14 +1,8 @@
-import React from "react";
-
 const Footer = () => {
-    
     return (
         <>
-            <div className="bg-blue-400 h-20 w-full">
-                <label htmlFor="tick" className="">
-                    Im Footer
-                </label>
-                <input type="checkbox" id="tick" className="accent-pink-800" />
+            <div className="bg-teal-500 h-20 w-full dark:bg-teal-900 flex justify-center items-center">
+                <div className="text-black dark:text-white"> Designed And Developed By Rishon V Fernandes</div>
             </div>
         </>
     );

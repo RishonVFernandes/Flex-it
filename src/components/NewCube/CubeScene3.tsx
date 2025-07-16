@@ -1,4 +1,3 @@
-// import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import Cubelet from "./Cubelet";
 import { Group } from "three";
@@ -67,10 +66,6 @@ const CubeScene3 = () => {
                 <Cubelet position={[0, -1, 0]} colors={{ny: "white"}} />
                 <Cubelet position={[0, -1, -1]} colors={{ny: "white", nz: "green"}} />
             </group>
-            {/* <mesh position={[0, -3, 0]} onClick={rotateRight}>
-                <boxGeometry args={[2, 1, 0.2]} />
-                <meshStandardMaterial color="black" />
-            </mesh> */}
         </>
     );
 };

@@ -10,7 +10,6 @@ interface TodosType {
 }
 const TodosPage = () => {
     const [title, setTitle] = useState<string>("");
-    // const [editIsVisible, setEditIsVisible] = useState<boolean>(false);
     const [editTitle, setEditTitle] = useState<string>("");
 
     const [selectedTodo, setSelectedTodo] = useState<TodosType | null>(null);
@@ -19,7 +18,8 @@ const TodosPage = () => {
 
     const fetchTodos = async (): Promise<TodosType[]> => {
         const res = await axios.get<{ todos: TodosType[] }>(
-            "http://localhost:3000/todo"
+            "http://localhost:3000/todo",
+            { withCredentials: true }
         );
         return res.data.todos;
     };
@@ -99,38 +99,38 @@ const TodosPage = () => {
 
     return (
         <>
-            <div className="bg-purple-300 flex flex-col justify-center items-center p-4">
-                <div className="text-purple-900 text-2xl font-bold">
+            <div className="bg-purple-300 flex flex-col justify-center items-center p-4 dark:bg-gray-900">
+                <h1 className="text-purple-900 text-2xl font-bold dark:text-blue-200">
                     Create a To-do
-                </div>
+                </h1>
                 <form
                     action=""
                     onSubmit={handleSubmit}
-                    className="bg-purple-500 w-100 p-5 rounded-xl"
+                    className="bg-purple-500 w-90 sm:w-120 p-5 rounded-xl dark:bg-indigo-900"
                 >
                     <div className="flex flex-col">
                         <label htmlFor="title" className="text-white font-bold">
                             Enter a Title :
                         </label>
-                        <input
-                            type="text"
+                        <textarea
+                            name=""
                             id="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             className="bg-white p-2 focus:outline-purple-900 focus:outline-3 rounded-xl"
-                        />
+                        ></textarea>
                     </div>
                     <button
                         type="submit"
-                        className="bg-purple-800 text-white mt-2 px-6 py-3 rounded-xl focus:bg-purple-900 hover:bg-purple-900 cursor-pointer hover:shadow-xl"
+                        className="bg-purple-800 text-white mt-2 px-6 py-3 rounded-xl focus:bg-purple-900 hover:bg-purple-900 cursor-pointer hover:shadow-xl dark:bg-blue-500"
                     >
                         {creating ? "Adding..." : "Add"}
                     </button>
                 </form>
             </div>
 
-            <div className="bg-blue-100 flex flex-col items-center">
-                <div className="text-blue-900 text-2xl font-bold">
+            <div className="bg-blue-100 flex flex-col items-center dark:bg-gray-800">
+                <div className="text-blue-900 text-2xl font-bold dark:text-blue-200">
                     Your To-dos
                 </div>
                 {!isLoading ? (
@@ -138,14 +138,14 @@ const TodosPage = () => {
                         {todos.map((todo: TodosType, index: number) => (
                             <div
                                 key={todo.id}
-                                className="bg-blue-200 w-200 flex justify-between my-2 p-2"
+                                className="bg-blue-200 w-90 sm:w-120 md:w-150 lg:w-200 flex justify-between my-2 p-2 dark:bg-gray-900 dark:text-white"
                             >
                                 <div className="flex gap-3 items-center">
                                     <div
-                                        className={`font-bold text-lg cursor-pointer ${
+                                        className={`font-bold text-lg cursor-pointer text-wrap  ${
                                             todo.isCompleted
                                                 ? "line-through text-green-700"
-                                                : "text-black"
+                                                : "text-black dark:text-white"
                                         }`}
                                         style={{}}
                                         onClick={() => {
@@ -154,15 +154,13 @@ const TodosPage = () => {
                                     >
                                         To-do {index + 1} : {todo.title}
                                     </div>
-                                        {
-                                            todo.isCompleted && (
-                                                <div className="bg-green-700 w-4 h-4 flex justify-center rounded-sm">
-                                                    <div className="w-2 h-3 border-3 border-t-transparent border-l-transparent border-white rotate-z-30"></div>
-                                                </div>
-                                            )
-                                        }
+                                    {todo.isCompleted && (
+                                        <div className="bg-green-700 w-4 h-4 flex justify-center rounded-sm">
+                                            <div className="w-2 h-3 border-3 border-t-transparent border-l-transparent border-white rotate-z-30"></div>
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="flex gap-3 items-center">
+                                <div className="md:flex gap-3 items-center">
                                     <div>
                                         {todo.createdAt
                                             .toLocaleString()
@@ -204,10 +202,14 @@ const TodosPage = () => {
                                 className="w-80"
                             >
                                 <div className="flex justify-between">
-                                    <label htmlFor="edit_title" className="font-bold text-2xl text-blue-900">
+                                    <label
+                                        htmlFor="edit_title"
+                                        className="font-bold text-2xl text-blue-900"
+                                    >
                                         Edit Todo :
                                     </label>
-                                    <button className="font-bold text-blue-900 border border-3 w-6 h-6 rounded-md hover:bg-blue-900 hover:text-white hover:border-blue-900"
+                                    <button
+                                        className="font-bold text-blue-900 border border-3 w-6 h-6 rounded-md hover:bg-blue-900 hover:text-white hover:border-blue-900"
                                         onClick={() => setSelectedTodo(null)}
                                     >
                                         X

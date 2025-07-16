@@ -1,4 +1,3 @@
-// import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import Cubelet from "./Cubelet";
 import { Group } from "three";
@@ -8,6 +7,7 @@ const CubeScene10 = () => {
     const topLayerRef = useRef<Group>(null);
     const bottomLayerRef = useRef<Group>(null);
     const middleLayerRef = useRef<Group>(null);
+    const cubeRef = useRef<Group>(null);
     // const duration = 2.0;
 
     useEffect(() => {
@@ -32,8 +32,32 @@ const CubeScene10 = () => {
         return () => clearTimeout(timeout)
     }, []);
 
+    useEffect(() => {
+        if(!cubeRef.current) return;
+        gsap.from(cubeRef.current.rotation, {
+            z: cubeRef.current.rotation.z + Math.PI * 2,
+            duration: 2.0,
+            ease: "power2.inOut",
+        })
+        // gsap.from(cubeRef.current.scale, {
+        //     x: cubeRef.current.scale.x + 1,
+        //     y: cubeRef.current.scale.y + 1,
+        //     z: cubeRef.current.scale.z + 1,
+
+        //     duration: 3.0,
+        //     ease: "elastic"
+        // })
+
+        // gsap.from(cubeRef.current.up, {
+        //     x: cubeRef.current.up.x + 2,
+        //     duration: 2.0,
+        //     ease: "elastic"
+        // })
+    })
+
     return (
         <>
+        <group ref={cubeRef}>
             <group ref={topLayerRef}>
                 {/* 9 cubelets explicitly on the right face (x = 1) */}
                 <Cubelet
@@ -139,6 +163,7 @@ const CubeScene10 = () => {
                 <boxGeometry args={[2, 1, 0.2]} />
                 <meshStandardMaterial color="black" />
             </mesh> */}
+        </group>
         </>
     );
 };

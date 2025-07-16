@@ -1,8 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from "react";
-import { toggleSidebar } from "../../store/sidebarSlice";
-import { useDispatch } from "react-redux";
 import { Canvas } from "@react-three/fiber";
-// import { OrbitControls } from "@react-three/drei";
+// import { Environment, OrbitControls } from "@react-three/drei";
 import SolvedCube from "../../components/NewCube/SolvedCube.tsx";
 import CubeScene1 from "../../components/NewCube/CubeScene1.tsx";
 import CubeScene2 from "../../components/NewCube/CubeScene2.tsx";
@@ -14,6 +12,7 @@ import CubeScene7 from "../../components/NewCube/CubeScene7.tsx";
 import CubeScene8 from "../../components/NewCube/CubeScene8.tsx";
 import CubeScene9 from "../../components/NewCube/CubeScene9.tsx";
 import CubeScene10 from "../../components/NewCube/CubeScene10.tsx";
+import Footer from "../../components/Footer/Footer.tsx";
 
 // R',U',R,U,F',L',D,R,B2,U,D
 const scenes = [
@@ -31,22 +30,33 @@ const scenes = [
 ];
 
 const PortfolioPage = () => {
-    const dispatch = useDispatch();
-
     const canvasRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const [index, setIndex] = useState(0);
-    // const [isSolved, setIsSolved] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             const totalScenes = scenes.length;
-            const sectionHeight = window.innerHeight * (1 / 4); // 50vh in pixels
+            const sectionHeight = window.innerHeight * (1 / 2); // 50vh in pixels
             const totalHeight = sectionHeight * totalScenes;
 
             // Compute a scroll ratio from 0 to 1
             const scrollY = window.scrollY;
             const scrollProgress = scrollY / totalHeight;
+
+            if (!containerRef.current) return;
+            const isFixed = scrollY > 270;
+            if(window.innerWidth > 600 ){
+                containerRef.current.style.position = isFixed
+                    ? "fixed"
+                    : "absolute";
+                containerRef.current.style.top = isFixed ? "60px" : "auto";
+            }
+            else{
+                containerRef.current.style.position = "fixed"
+            }
+            // containerRef.current.style.right = isFixed ? "40px": "40px";
 
             // Map scroll progress to scene index
             const newIndex = Math.min(
@@ -61,7 +71,6 @@ const PortfolioPage = () => {
                 if (scrollY == 0) {
                     setTimeout(() => {
                         setIndex(0);
-                        console.log('hello')
                     }, 1000);
                 }
             }
@@ -86,76 +95,59 @@ const PortfolioPage = () => {
 
     return (
         <>
-            <header className="bg-black sticky top-0 z-10">
-                <div className="flex justify-between items-center bg-blue-400 h-15 px-5">
-                    <div>LOGO</div>
-                    <nav className="">
-                        <ul className="flex gap-20">
-                            {/* <li onClick={toggleSidebar}>Home</li> */}
-                            <li onClick={() => dispatch(toggleSidebar())}>
-                                Home
-                            </li>
-                            <li>About Us</li>
-                            <li>Contact Us</li>
-                            <li>Settings</li>
-                        </ul>
-                    </nav>
-                    <div className="flex gap-10">
-                        <button className="rounded-full outline outline-blue-900 px-2 py-1 hover:bg-blue-900 hover:text-red-100">
-                            Sign Up
-                        </button>
-                        <button className="bg-mint-500">Log In</button>
-                    </div>
-                </div>
-            </header>
-            <main className=" h-200 bg-gray-800 relative p-10 ">
-                <div className="w-150 h-100  fixed right-0 z-11">
+            <main className=" ">
+                <div
+                    className={` w-[70vw] h-100 right-0 bottom-0 absolute z-1 sm:w-[60vw]`}
+                    ref={containerRef}
+                >
                     <Canvas
-                        camera={{ position: [5, 5, 5], fov: 60 }}
+                        camera={{ position: [4, 4, 4], fov: 60 }}
                         ref={canvasRef}
                     >
-                        <ambientLight intensity={0.5} />
+                        <ambientLight intensity={0.9} />
+
                         <pointLight position={[10, 10, 10]} />
-                        <Suspense fallback={null}>
-                            {/* <Environment preset="forest" /> */}
+                        <Suspense fallback={"loading"}>
+                            {/* <Environment preset="sunset" /> */}
                         </Suspense>
                         <CurrentScene />
                         {/* <CubeScene10/> */}
-                        {/* <OrbitControls /> */}
+                        {/* {index === scenes.length - 1 && (
+                            <OrbitControls enableZoom={false} />
+                        )} */}
+                        {/* <OrbitControls/> */}
                     </Canvas>
                 </div>
-                {/* <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-90">
-                    Hello ,THis is Rishon V Fernandes
-                </div>
-                <div className="w-100 h-50 text-6xl font-bold text-gray-500 z-99">
-                    Welcome to my Website Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Porro aspernatur nam veritatis accusamus
-                    ex facere, neque repellat suscipit repudiandae et cumque
-                    harum perspiciatis nemo fugiat labore voluptatem aut libero
-                    ab eius explicabo officiis, dignissimos eveniet quod ipsum.
-                    Perferendis ullam nulla dolor assumenda rem voluptates
-                    nostrum.
-                </div> */}
 
-                <div className="bg-gray-700 z-99">
-                    <div style={{ height: "60px" }}>
+                <div className="z-2">
+                    <div className="" style={{ height: "60px" }}>
                         {phrases.map((_, i) => (
                             <section
+                                className="h-[90vh] bg-cyan-100 dark:bg-gray-900"
                                 key={i}
-                                style={{
-                                    height: "90vh",
-                                    borderBottom: "1px solid #ccc",
-                                }}
                             >
-                                <h1 className="w-100 h-50 text-6xl font-bold text-gray-500 z-90">
+                                <div className=" pt-[15%] pl-[15%] w-60 text-3xl font-bold dark:text-teal-600/70 text-black z-90 sticky top-[100px] sm:w-150 sm:text-6xl font-display">
                                     {phrases[i]}
-                                </h1>
+
+                                    {i == 0 && (
+                                        <div className="mt-3 w-60 flex justify-between">
+                                            <button className="text-lg text-black h-10 p-2 bg-teal-600/50 rounded-lg hover:bg-teal-600/90 dark:text-white">
+                                                Hello
+                                            </button>
+                                            <button className="text-lg text-black h-10 p-2 rounded-lg outline outline-teal-800 hover:bg-teal-600/90 dark:text-white">
+                                                Say Someting
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </section>
                         ))}
+                        <footer>
+                            <Footer />
+                        </footer>
                     </div>
                 </div>
             </main>
-            <footer></footer>
         </>
     );
 };

@@ -1,8 +1,6 @@
-// import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import Cubelet from "./Cubelet";
 import { Group } from "three";
-import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 
 const SolvedCube = () => {
@@ -44,14 +42,6 @@ const SolvedCube = () => {
                     ease: "power2.inOut",
                 });
             }
-            // const timeout = setTimeout(() => {
-
-            //     if (!cubeRef.current) return;
-            
-                
-            // }, 400)
-            // return () => clearTimeout(timeout)
-
         }
 
         window.addEventListener("scroll", handleScroll);
@@ -72,15 +62,6 @@ const SolvedCube = () => {
 
         return () => clearTimeout(timeout)
     })
-
-    // useFrame(() => {
-    //     if (!cubeRef.current) return;
-
-    //     const scrollTop = window.scrollY;
-    //     cubeRef.current.rotation.y = scrollTop * 0.001
-    //     cubeRef.current.rotation.z = scrollTop * 0.001
-    //     cubeRef.current.rotation.x = scrollTop * 0.001
-    // })
 
     return (
         // This cube is correct

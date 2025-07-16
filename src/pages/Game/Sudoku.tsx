@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import penguins from "../../../public/penguins.jpg"
+import penguins from "../../assets/penguins.jpg"
 
 const Sudoku = () => {
     return (

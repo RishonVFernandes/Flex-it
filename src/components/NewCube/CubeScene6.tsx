@@ -66,11 +66,6 @@ const CubeScene6 = () => {
                 <Cubelet position={[-1, -1, 0]} colors={{nx: "white", ny: "blue"}}/>
                 <Cubelet position={[-1, -1, -1]} colors={{nx: "red", nz: "yellow", ny: "blue"}}/>
             </group>
-            
-            {/* <mesh position={[0, -3, 0]} onClick={rotateRight}>
-                <boxGeometry args={[2, 1, 0.2]} />
-                <meshStandardMaterial color="black" />
-            </mesh> */}
         </>
     );
 };

@@ -1,4 +1,3 @@
-// import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import Cubelet from "./Cubelet";
 import { Group } from "three";
@@ -11,18 +10,17 @@ const CubeScene1 = () => {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-
             if (!rightLayerRef.current) return;
-        
+
             gsap.to(rightLayerRef.current.rotation, {
                 x: rightLayerRef.current.rotation.x + Math.PI / 2,
                 duration: 0.8,
                 ease: "power2.inOut",
             });
-        }, 50)
+        }, 50);
 
-        return () => clearTimeout(timeout)
-    })
+        return () => clearTimeout(timeout);
+    });
 
     return (
         // this cubes right side is rotated R'
@@ -37,41 +35,94 @@ const CubeScene1 = () => {
                         pz: "white", // Front
                     }}
                 />
-                <Cubelet position={[1, 1, 0]} colors={{px: "red", py: "blue"}} />
-                <Cubelet position={[1, 1, -1]} colors={{px: "red", py: "blue", nz: "yellow"}} />
-                <Cubelet position={[1, 0, 1]} colors={{px:"red", pz:"white"}} />
-                <Cubelet position={[1, 0, 0]} colors={{px:"red"}} />
-                <Cubelet position={[1, 0, -1]} colors={{px:"red", nz: "yellow"}} />
-                <Cubelet position={[1, -1, 1]} colors={{px:"red", pz: "white", ny: "green"}} />
-                <Cubelet position={[1, -1, 0]} colors={{px:"red", ny: "green"}} />
-                <Cubelet position={[1, -1, -1]} colors={{px:"red", ny: "green", nz: "yellow"}} />
+                <Cubelet
+                    position={[1, 1, 0]}
+                    colors={{ px: "red", py: "blue" }}
+                />
+                <Cubelet
+                    position={[1, 1, -1]}
+                    colors={{ px: "red", py: "blue", nz: "yellow" }}
+                />
+                <Cubelet
+                    position={[1, 0, 1]}
+                    colors={{ px: "red", pz: "white" }}
+                />
+                <Cubelet position={[1, 0, 0]} colors={{ px: "red" }} />
+                <Cubelet
+                    position={[1, 0, -1]}
+                    colors={{ px: "red", nz: "yellow" }}
+                />
+                <Cubelet
+                    position={[1, -1, 1]}
+                    colors={{ px: "red", pz: "white", ny: "green" }}
+                />
+                <Cubelet
+                    position={[1, -1, 0]}
+                    colors={{ px: "red", ny: "green" }}
+                />
+                <Cubelet
+                    position={[1, -1, -1]}
+                    colors={{ px: "red", ny: "green", nz: "yellow" }}
+                />
             </group>
             <group ref={leftLayerRef} position={[0, 0, 0]}>
-                <Cubelet position={[-1, 1, 1]} colors={{nx: "orange", py: "yellow", pz:"blue"}} />
-                <Cubelet position={[-1, 1, 0]} colors={{nx: "orange", py: "yellow"}} />
-                <Cubelet position={[-1, 1, -1]} colors={{nx: "orange", py: "yellow", nz: "green"}} />
-                <Cubelet position={[-1, 0, 1]} colors={{nx: "orange", pz: "blue"}}/>
-                <Cubelet position={[-1, 0, 0]} colors={{nx: "orange"}}/>
-                <Cubelet position={[-1, 0, -1]} colors={{nx: "orange", nz: "green"}}/>
-                <Cubelet position={[-1, -1, 1]} colors={{nx: "orange", pz: "blue", ny: "white"}}/>
-                <Cubelet position={[-1, -1, 0]} colors={{nx: "orange", ny: "white"}}/>
-                <Cubelet position={[-1, -1, -1]} colors={{nx: "orange", nz: "green", ny: "white"}}/>
+                <Cubelet
+                    position={[-1, 1, 1]}
+                    colors={{ nx: "orange", py: "yellow", pz: "blue" }}
+                />
+                <Cubelet
+                    position={[-1, 1, 0]}
+                    colors={{ nx: "orange", py: "yellow" }}
+                />
+                <Cubelet
+                    position={[-1, 1, -1]}
+                    colors={{ nx: "orange", py: "yellow", nz: "green" }}
+                />
+                <Cubelet
+                    position={[-1, 0, 1]}
+                    colors={{ nx: "orange", pz: "blue" }}
+                />
+                <Cubelet position={[-1, 0, 0]} colors={{ nx: "orange" }} />
+                <Cubelet
+                    position={[-1, 0, -1]}
+                    colors={{ nx: "orange", nz: "green" }}
+                />
+                <Cubelet
+                    position={[-1, -1, 1]}
+                    colors={{ nx: "orange", pz: "blue", ny: "white" }}
+                />
+                <Cubelet
+                    position={[-1, -1, 0]}
+                    colors={{ nx: "orange", ny: "white" }}
+                />
+                <Cubelet
+                    position={[-1, -1, -1]}
+                    colors={{ nx: "orange", nz: "green", ny: "white" }}
+                />
             </group>
-            <group ref={centerLayerRef} >
-                <Cubelet position={[0, 1, 1]} colors={{py: "yellow", pz: "blue"}} />
-                <Cubelet position={[0, 1, 0]} colors={{py: "yellow"}}/>
-                <Cubelet position={[0, 1, -1]} colors={{py: "yellow", nz: "green"}} />
-                <Cubelet position={[0, 0, 1]} colors={{pz: "blue"}} />
+            <group ref={centerLayerRef}>
+                <Cubelet
+                    position={[0, 1, 1]}
+                    colors={{ py: "yellow", pz: "blue" }}
+                />
+                <Cubelet position={[0, 1, 0]} colors={{ py: "yellow" }} />
+                <Cubelet
+                    position={[0, 1, -1]}
+                    colors={{ py: "yellow", nz: "green" }}
+                />
+                <Cubelet position={[0, 0, 1]} colors={{ pz: "blue" }} />
                 <Cubelet position={[0, 0, 0]} />
-                <Cubelet position={[0, 0, -1]} colors={{nz: "green"}} />
-                <Cubelet position={[0, -1, 1]} colors={{pz: "blue", ny: "white"}} />
-                <Cubelet position={[0, -1, 0]} colors={{ny: "white"}} />
-                <Cubelet position={[0, -1, -1]} colors={{ny: "white", nz: "green"}} />
+                <Cubelet position={[0, 0, -1]} colors={{ nz: "green" }} />
+                <Cubelet
+                    position={[0, -1, 1]}
+                    colors={{ pz: "blue", ny: "white" }}
+                />
+                <Cubelet position={[0, -1, 0]} colors={{ ny: "white" }} />
+                <Cubelet
+                    position={[0, -1, -1]}
+                    colors={{ ny: "white", nz: "green" }}
+                />
             </group>
-            {/* <mesh position={[0, -3, 0]} onClick={rotateRight}>
-                <boxGeometry args={[2, 1, 0.2]} />
-                <meshStandardMaterial color="black" />
-            </mesh> */}
         </>
     );
 };

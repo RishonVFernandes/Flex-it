@@ -1,0 +1,14 @@
+.navbar ul li {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(20, 104, 104);
+        outline-color: #00d5be;
+        outline-width: 2px;
+        outline-style: groove;
+    }
+}

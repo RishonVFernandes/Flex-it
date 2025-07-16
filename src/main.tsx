@@ -7,20 +7,17 @@ import App from "./App.tsx";
 
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
-import { SidebarProvider } from "./context/SidebarContext.tsx";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
-    // <StrictMode>
+    <StrictMode>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
                 <Provider store={store}>
-                    {/* <SidebarProvider> */}
                     <App />
-                    {/* </SidebarProvider> */}
                 </Provider>
             </QueryClientProvider>
         </BrowserRouter>
-    // </StrictMode>
+    </StrictMode>
 );
