@@ -26,7 +26,7 @@ const Navbar = () => {
                 </div>
                 <nav className={`${styles.navbar} hidden md:block h-full`}>
                     <ul className="flex gap-10 h-full">
-                        <li>Home</li>
+                        <li><a href="/portfolio/rishon">Home</a></li>
                         <li>
                             <a href="/portfolio/about">About Us</a>
                         </li>

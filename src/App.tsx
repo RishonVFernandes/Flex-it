@@ -23,9 +23,10 @@ function App() {
                 <Route path="/signup" element={<SignUpPage />}></Route>
                 <Route path="/portfolio" element={<PortfolioPageLayout />}>
                     <Route path="rishon" element={<PortfolioPage />} />
-                    <Route path="about" element={<AboutUsPage/>}  ></Route>
+                    <Route path="about" element={<AboutUsPage />}></Route>
                 </Route>
                 <Route path="/" element={<MainLayout />}>
+                    <Route index element={<TodosPage />} />
                     <Route path="home" element={<Home />} />
                     <Route path="user" element={<UsersPage />} />
                     <Route path="todo" element={<TodosPage />} />
