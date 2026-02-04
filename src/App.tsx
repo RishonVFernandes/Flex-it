@@ -23,13 +23,13 @@ function App() {
             <Routes>
                 <Route path="/login" element={<LoginPage />}></Route>
                 <Route path="/signup" element={<SignUpPage />}></Route>
-                <Route path="/" element={<PortfolioPageLayout />}>
-                    <Route index element={<PortfolioPage />} />
-                </Route>
-                <Route path="/rishon" element={<MainLayout />}>
-                    <Route index element={<Home />} />
-                    <Route path="home2" element={<Home />} />
+                <Route path="/portfolio" element={<PortfolioPageLayout />}>
+                    <Route path="rishon" element={<PortfolioPage />} />
                     <Route path="about" element={<AboutUsPage />}></Route>
+                </Route>
+                <Route path="/" element={<MainLayout />}>
+                    <Route index element={<TodosPage />} />
+                    <Route path="home2" element={<Home />} />
                     <Route path="user" element={<UsersPage />} />
                     <Route path="todo" element={<TodosPage />} />
                     <Route path="chat" element={<ChatPage />} />
