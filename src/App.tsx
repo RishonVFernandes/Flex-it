@@ -23,10 +23,10 @@ function App() {
             <Routes>
                 <Route path="/login" element={<LoginPage />}></Route>
                 <Route path="/signup" element={<SignUpPage />}></Route>
-                <Route path="/home" element={<PortfolioPageLayout />}>
+                <Route path="/" element={<PortfolioPageLayout />}>
                     <Route index element={<PortfolioPage />} />
                 </Route>
-                <Route path="/" element={<MainLayout />}>
+                <Route path="/rishon" element={<MainLayout />}>
                     <Route index element={<Home />} />
                     <Route path="home2" element={<Home />} />
                     <Route path="about" element={<AboutUsPage />}></Route>
