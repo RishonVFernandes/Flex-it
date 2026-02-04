@@ -1,1 +1,4 @@
 /// <reference types="vite/client" />
+
+VITE_SUPABASE_URL='https://fayphhomcyvhgbumpbgb.supabase.co'
+VITE_SUPABASE_ANNON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZheXBoaG9tY3l2aGdidW1wYmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIyNjEyMDYsImV4cCI6MjA2NzgzNzIwNn0.nnnBG9ePuEu-WnM6W6zb7dNXVRPISr1wMhhxXQXclYE

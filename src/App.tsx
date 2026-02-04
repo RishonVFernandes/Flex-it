@@ -11,6 +11,8 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage.tsx";
 import PortfolioPageLayout from "./layouts/PortfolioPageLayout/PortfolioPageLayout.tsx";
 import ChatPage from "./pages/ChatPage/ChatPage.tsx";
 import AboutUsPage from "./pages/AbourUsPage/AboutUsPage.tsx";
+import ArchivesPage from "./pages/ArchivesPage/ArchivesPage.tsx";
+import ArchivesList from "./pages/ArchivesPage/ArchivesList.tsx"
 import { useAuth } from "./hooks/useAuth.ts";
 
 function App() {
@@ -21,17 +23,19 @@ function App() {
             <Routes>
                 <Route path="/login" element={<LoginPage />}></Route>
                 <Route path="/signup" element={<SignUpPage />}></Route>
-                <Route path="/portfolio" element={<PortfolioPageLayout />}>
-                    <Route path="rishon" element={<PortfolioPage />} />
-                    <Route path="about" element={<AboutUsPage />}></Route>
+                <Route path="/home" element={<PortfolioPageLayout />}>
+                    <Route index element={<PortfolioPage />} />
                 </Route>
                 <Route path="/" element={<MainLayout />}>
-                    <Route index element={<TodosPage />} />
-                    <Route path="home" element={<Home />} />
+                    <Route index element={<Home />} />
+                    <Route path="home2" element={<Home />} />
+                    <Route path="about" element={<AboutUsPage />}></Route>
                     <Route path="user" element={<UsersPage />} />
                     <Route path="todo" element={<TodosPage />} />
                     <Route path="chat" element={<ChatPage />} />
                     <Route path="play" element={<Sudoku />} />
+                    <Route path="archives" element={<ArchivesList/>}></Route>
+                    <Route path="archives/:id" element={<ArchivesPage/>}></Route>
                 </Route>
             </Routes>
         </>

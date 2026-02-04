@@ -17,7 +17,7 @@ const Navbar = () => {
         <>
             <div className="flex justify-between items-center bg-teal-500 h-15 px-5 sticky top-0 z-3 dark:bg-teal-800 dark:text-white">
                 <div className="w-10" onClick={() => dispatch(toggleSidebar())}>
-                    <img src={logo} alt="" className="hidden md:flex" />
+                    <img src={logo} alt="" className="hidden md:flex cursor-pointer hover:border hover:border-teal-600 rounded-full" />
                     <div className="md:hidden h-6 flex flex-col items-center gap-1 justify-center ">
                         <div className="w-8 h-1 bg-black dark:bg-white rounded-full"></div>
                         <div className="w-8 h-1 bg-black dark:bg-white rounded-full"></div>
@@ -26,9 +26,12 @@ const Navbar = () => {
                 </div>
                 <nav className={`${styles.navbar} hidden md:block h-full`}>
                     <ul className="flex gap-10 h-full">
-                        <li><a href="/portfolio/rishon">Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li>
-                            <a href="/portfolio/about">About Us</a>
+                            <a href="/about">About Us</a>
+                        </li>
+                        <li>
+                            <a href="/archives">Archives</a>
                         </li>
                         <li>Contact Us</li>
                         <li>Settings</li>

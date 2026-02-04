@@ -21,6 +21,13 @@ const Sidebar = () => {
                 </div>
                 <ul className="bg-blue-600 flex flex-col items-center pt-2 dark:bg-teal-600">
                     <Link
+                        to={"/home"}
+                        onClick={() => dispatch(closeSidebar())}
+                        className="text-white w-full py-2 text-center hover:bg-blue-500 dark:hover:bg-teal-800"
+                    >
+                        Home
+                    </Link>
+                    <Link
                         to={"/todo"}
                         onClick={() => dispatch(closeSidebar())}
                         className="text-white w-full py-2 text-center hover:bg-blue-500 dark:hover:bg-teal-800"

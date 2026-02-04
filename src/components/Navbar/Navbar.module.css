@@ -7,8 +7,6 @@
 
     &:hover {
         background-color: rgb(20, 104, 104);
-        outline-color: #00d5be;
-        outline-width: 2px;
-        outline-style: groove;
+        outline-color: #00d5be; 
     }
 }
