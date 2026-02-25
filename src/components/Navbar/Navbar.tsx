@@ -26,14 +26,14 @@ const Navbar = () => {
                 </div>
                 <nav className={`${styles.navbar} hidden md:block h-full`}>
                     <ul className="flex gap-10 h-full">
-                        <li><a href="/home">Home</a></li>
+                        <li><a href="/app/home">Home</a></li>
                         <li>
                             <a href="/about">About Us</a>
                         </li>
                         <li>
-                            <a href="/archives">Archives</a>
+                            <a href="/app/archives">Archives</a>
                         </li>
-                        <li>Contact Us</li>
+                            <li>Contact Us</li>
                         <li>Settings</li>
                         <button onClick={() => logoutUser()}>
                             {isLoggingOut ? "Logging out..." : "Logout"}

@@ -39,11 +39,23 @@ const ArchivesList = () => {
 
     const createArchive = async () => {
 
+        const {
+            data: { user },
+            error: userError,
+        } = await supabase.auth.getUser();
+
+        if (userError || !user) {
+            console.error(userError);
+            alert("User not authenticated");
+            return;
+        }
+
         const { data, error } = await supabase
             .from("notes")
             .insert({
                 title: "Untitled",
                 content: { type: "doc", content: [] },
+                user_id: user.id,
             })
             .select("id")
             .single();
@@ -54,7 +66,7 @@ const ArchivesList = () => {
             return;
         }
 
-        window.location.href = `/notes/${data.id}`;
+        window.location.href = `/archives/${data.id}`;
     }
 
     if (loading) return <div style={{ padding: 20 }}>Loading notes...</div>;
@@ -72,7 +84,7 @@ const ArchivesList = () => {
                 {notes.map((note) => (
                     <a
                         key={note.id}
-                        href={`/archives/${note.id}`}
+                        href={`/app/archives/${note.id}`}
                         style={{
                             border: "1px solid #ddd",
                             borderRadius: 12,

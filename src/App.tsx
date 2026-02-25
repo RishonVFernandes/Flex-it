@@ -23,11 +23,11 @@ function App() {
             <Routes>
                 <Route path="/login" element={<LoginPage />}></Route>
                 <Route path="/signup" element={<SignUpPage />}></Route>
-                <Route path="/portfolio" element={<PortfolioPageLayout />}>
-                    <Route path="rishon" element={<PortfolioPage />} />
+                <Route path="/" element={<PortfolioPageLayout />}>
+                    <Route index element={<PortfolioPage />} />
                     <Route path="about" element={<AboutUsPage />}></Route>
                 </Route>
-                <Route path="/" element={<MainLayout />}>
+                <Route path="/app" element={<MainLayout />}>
                     <Route index element={<TodosPage />} />
                     <Route path="home2" element={<Home />} />
                     <Route path="user" element={<UsersPage />} />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { supabase } from "../../services/supabaseClient";
 
 interface UserType {
     username: string;
@@ -17,15 +18,43 @@ const SignUpPage = () => {
 
     const { mutate: createUser, isPending: creating } = useMutation({
         mutationFn: (newUser: UserType) =>
-            axios.post<{ user: UserType }>(
-                "http://localhost:3000/auth/register",
-                newUser
-            ),
+            // for local database
+            // axios.post<{ user: UserType }>(
+            //     "http://localhost:3000/auth/register",
+            //     newUser
+            // ),
+            // for supabase database
+            supabase.auth.signUp({ email: newUser.email, password: newUser.password, }),
         onSuccess: () => {
             // queryClient.invalidateQueries({ queryKey: ["users"] });
             setUsername("");
             setEmail("");
             setPassword("");
+
+            // supabase
+            // const user = data.data.user;
+
+            // if (user) {
+            //     // Store user in Redux
+            //     dispatch(setUser(user));
+
+            //     console.log("Signed up user:", user);
+
+            //     // Invalidate queries if using React Query for user state
+            //     queryClient.invalidateQueries({ queryKey: ["user"] });
+
+            //     // Clear form
+            //     setEmail("");
+            //     setPassword("");
+
+            //     // Navigate after successful signup
+            //     navigate("/portfolio/rishon");
+            // } else {
+            //     // Supabase sometimes requires email confirmation, handle accordingly
+            //     alert(
+            //         "Signup successful! Please check your email to confirm your account."
+            //     );
+            // }
         },
         onError: (error) => {
             console.error('Mutation falied :', error)
@@ -35,6 +64,7 @@ const SignUpPage = () => {
         e.preventDefault();
         try {
             createUser({ username, email, password });
+            console.log(username)
         } catch (error) {
             console.error(error);
         }

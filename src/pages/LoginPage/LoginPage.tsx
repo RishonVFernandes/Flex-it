@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/authSlice.ts";
+import { supabase } from "../../services/supabaseClient.ts";
 
 type Usertype = {
     email: string;
@@ -19,15 +20,19 @@ const LoginPage = () => {
 
     const { mutate: loginUser, isPending: loading } = useMutation({
         mutationFn: (newUser: Usertype) =>
-            axios
-                .post("http://localhost:3000/auth/login", newUser, {
-                    withCredentials: true,
-                })
-                .then((res) => res.data),
+            // for local database
+            // axios
+            //     .post("http://localhost:3000/auth/login", newUser, {
+            //         withCredentials: true,
+            //     })
+            //     .then((res) => res.data),
+
+            //for supabase auth database
+            supabase.auth.signInWithPassword({email: newUser.email, password: newUser.password}),
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["user"] });
-            dispatch(setUser(data.user));
-            console.log(data.user);
+            // dispatch(setUser(data.user));
+            console.log(data);
             setEmail("");
             setPassword("");
             navigate("/portfolio/rishon");
