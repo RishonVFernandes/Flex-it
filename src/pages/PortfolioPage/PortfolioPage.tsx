@@ -92,10 +92,7 @@ const PortfolioPage = () => {
     ];
 
     const CurrentScene = scenes[index];
-
-    const playSong = () => {
-        
-    }
+    
     // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
 const token: string = 'BQBIgR0FXs6BVaJ-2QPW8MKvGNlzeBV9g6k41FDPzjlj2108xR87hx2Q2U34upSTQCkwPQf8FV-Kvd5BQuHIC20_T-XIuAp1e7bREhMfENWADC-hbnOik3qukY3wntDfKRIGC6PMu4eygDL62LA2UC50ImWVqSBHPqTlCUa4KwA6ki7UVtw38m3W1gGs_w8OsP3szJPR6_FmAMKVA8JkMcaTq_uMnAIIc9ZxBkMh2-v9E7p91l_B6QQdBzuUkdNtAdBSYK7JMfX3d7fp6onnPhirfPB4RSEKRUZqgtQKylncUb821z3KnQSxGqSai0FiM6YQ6FY';
 
@@ -143,10 +140,11 @@ async function getTopTracks(): Promise<Track[]> {
   return data.items;
 }
 
-async function main() {
+async function playSong() {
   try {
     const topTracks = await getTopTracks();
 
+    console.log("get songs")
     topTracks.forEach(({ name, artists }) => {
       console.log(
         `${name} by ${artists.map((artist) => artist.name).join(", ")}`
@@ -157,7 +155,6 @@ async function main() {
   }
 }
 
-main();
 
     return (
         <>
