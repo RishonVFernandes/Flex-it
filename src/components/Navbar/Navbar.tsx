@@ -28,7 +28,7 @@ const Navbar = () => {
                     <ul className="flex gap-10 h-full">
                         <li><a href="/app/home">Home</a></li>
                         <li>
-                            <a href="/about">About Us</a>
+                            <a href="/about">About Me</a>
                         </li>
                         <li>
                             <a href="/app/archives">Archives</a>
