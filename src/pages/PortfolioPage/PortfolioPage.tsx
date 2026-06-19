@@ -82,13 +82,13 @@ const PortfolioPage = () => {
     }, [index]);
 
     const phrases = [
-        "Hello this is Rishon V Fernandes",
-        "Welcome to my Website",
-        "Enjoy the animation",
-        "Have a look",
+        "Goodmorning people",
+        "Welcome to the Archives",
+        "Do hang out ",
+        "till the end..",
         "at my website",
-        "I am a web developer",
-        "And i love pokemon",
+        "THats It....",
+        "See U Later.  Goodnight",
     ];
 
     const CurrentScene = scenes[index];
