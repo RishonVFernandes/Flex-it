@@ -35,7 +35,7 @@ const LoginPage = () => {
             console.log(data);
             setEmail("");
             setPassword("");
-            navigate("/portfolio/rishon");
+            navigate("/");
         },
         onError: (error) => {
             console.error("Mutation error :", error);

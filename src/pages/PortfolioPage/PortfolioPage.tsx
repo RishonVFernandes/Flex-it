@@ -92,7 +92,7 @@ const PortfolioPage = () => {
     ];
 
     const CurrentScene = scenes[index];
-    
+
     // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
 const token: string = 'BQBIgR0FXs6BVaJ-2QPW8MKvGNlzeBV9g6k41FDPzjlj2108xR87hx2Q2U34upSTQCkwPQf8FV-Kvd5BQuHIC20_T-XIuAp1e7bREhMfENWADC-hbnOik3qukY3wntDfKRIGC6PMu4eygDL62LA2UC50ImWVqSBHPqTlCUa4KwA6ki7UVtw38m3W1gGs_w8OsP3szJPR6_FmAMKVA8JkMcaTq_uMnAIIc9ZxBkMh2-v9E7p91l_B6QQdBzuUkdNtAdBSYK7JMfX3d7fp6onnPhirfPB4RSEKRUZqgtQKylncUb821z3KnQSxGqSai0FiM6YQ6FY';
 
@@ -202,9 +202,12 @@ async function playSong() {
                                             >
                                                 Play a song
                                             </button>
-                                            <button className="text-lg text-black h-10 p-2 rounded-lg outline outline-teal-800 hover:bg-teal-600/90 dark:text-white">
+                                            <button className="text-lg text-black h-10 p-2 rounded-lg outline outline-teal-800 hover:bg-teal-600/90 dark:text-white m-3">
                                                 Say Someting
                                             </button>
+                                            {/* <div className="display-none">
+                                                <input type="text" />
+                                            </div> */}
                                         </div>
                                     )}
                                 </div>
