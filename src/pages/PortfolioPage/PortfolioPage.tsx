@@ -47,13 +47,13 @@ const PortfolioPage = () => {
 
             if (!containerRef.current) return;
             const isFixed = scrollY > 270;
-            if(window.innerWidth > 600 ){
+            if (window.innerWidth > 600) {
                 containerRef.current.style.position = isFixed
                     ? "fixed"
                     : "absolute";
                 containerRef.current.style.top = isFixed ? "60px" : "auto";
             }
-            else{
+            else {
                 containerRef.current.style.position = "fixed"
             }
             // containerRef.current.style.right = isFixed ? "40px": "40px";
@@ -82,83 +82,83 @@ const PortfolioPage = () => {
     }, [index]);
 
     const phrases = [
-        "Goodmorning people",
-        "Welcome to the Archives",
-        "Do hang out ",
-        "till the end..",
-        "at my website",
-        "THats It....",
-        "See U Later.  Goodnight",
+        { text: "Goodmorning people", color: "#ff6b6b" },
+        { text: "Welcome to the Archives", color: "#4d96ff" },
+        { text: "Do hang out", color: "#6bcB77" },
+        { text: "till the end..", color: "#ffd93d" },
+        { text: "at my website", color: "#845ec2" },
+        { text: "THats It....", color: "#ff9671" },
+        { text: "See U Later. Goodnight", color: "#2c2c2c" },
     ];
 
     const CurrentScene = scenes[index];
 
     // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-const token: string = 'BQBIgR0FXs6BVaJ-2QPW8MKvGNlzeBV9g6k41FDPzjlj2108xR87hx2Q2U34upSTQCkwPQf8FV-Kvd5BQuHIC20_T-XIuAp1e7bREhMfENWADC-hbnOik3qukY3wntDfKRIGC6PMu4eygDL62LA2UC50ImWVqSBHPqTlCUa4KwA6ki7UVtw38m3W1gGs_w8OsP3szJPR6_FmAMKVA8JkMcaTq_uMnAIIc9ZxBkMh2-v9E7p91l_B6QQdBzuUkdNtAdBSYK7JMfX3d7fp6onnPhirfPB4RSEKRUZqgtQKylncUb821z3KnQSxGqSai0FiM6YQ6FY';
+    const token: string = 'BQBIgR0FXs6BVaJ-2QPW8MKvGNlzeBV9g6k41FDPzjlj2108xR87hx2Q2U34upSTQCkwPQf8FV-Kvd5BQuHIC20_T-XIuAp1e7bREhMfENWADC-hbnOik3qukY3wntDfKRIGC6PMu4eygDL62LA2UC50ImWVqSBHPqTlCUa4KwA6ki7UVtw38m3W1gGs_w8OsP3szJPR6_FmAMKVA8JkMcaTq_uMnAIIc9ZxBkMh2-v9E7p91l_B6QQdBzuUkdNtAdBSYK7JMfX3d7fp6onnPhirfPB4RSEKRUZqgtQKylncUb821z3KnQSxGqSai0FiM6YQ6FY';
 
-interface Artist {
-  id: string;
-  name: string;
-}
+    interface Artist {
+        id: string;
+        name: string;
+    }
 
-interface Track {
-  id: string;
-  name: string;
-  artists: Artist[];
-}
+    interface Track {
+        id: string;
+        name: string;
+        artists: Artist[];
+    }
 
-interface TopTracksResponse {
-  items: Track[];
-}
+    interface TopTracksResponse {
+        items: Track[];
+    }
 
-async function fetchWebApi<T>(
-  endpoint: string,
-  method: string,
-  body?: unknown
-): Promise<T> {
-  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-    method,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!res.ok) {
-    throw new Error(`Spotify API Error: ${res.status} ${res.statusText}`);
-  }
+    async function fetchWebApi<T>(
+        endpoint: string,
+        method: string,
+        body?: unknown
+    ): Promise<T> {
+        const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+            method,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: body ? JSON.stringify(body) : undefined,
+        });
+        if (!res.ok) {
+            throw new Error(`Spotify API Error: ${res.status} ${res.statusText}`);
+        }
 
-  return (await res.json()) as T;
-}
+        return (await res.json()) as T;
+    }
 
-async function getTopTracks(): Promise<Track[]> {
-  // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
-  const data = await fetchWebApi<TopTracksResponse>(
-    "v1/me/top/tracks?time_range=long_term&limit=5",
-    "GET"
-  );
+    async function getTopTracks(): Promise<Track[]> {
+        // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
+        const data = await fetchWebApi<TopTracksResponse>(
+            "v1/me/top/tracks?time_range=long_term&limit=5",
+            "GET"
+        );
 
-  return data.items;
-}
+        return data.items;
+    }
 
-async function playSong() {
-  try {
-    const topTracks = await getTopTracks();
+    async function playSong() {
+        try {
+            const topTracks = await getTopTracks();
 
-    console.log("get songs")
-    topTracks.forEach(({ name, artists }) => {
-      console.log(
-        `${name} by ${artists.map((artist) => artist.name).join(", ")}`
-      );
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
+            console.log("get songs")
+            topTracks.forEach(({ name, artists }) => {
+                console.log(
+                    `${name} by ${artists.map((artist) => artist.name).join(", ")}`
+                );
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 
     return (
         <>
-        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+            <script src="https://sdk.scdn.co/spotify-player.js"></script>
 
             <main className=" ">
                 <div
@@ -186,23 +186,24 @@ async function playSong() {
 
                 <div className="z-2">
                     <div className="" style={{ height: "60px" }}>
-                        {phrases.map((_, i) => (
+                        {phrases.map((phrases, i) => (
                             <section
-                                className="h-[90vh] bg-cyan-100 dark:bg-gray-900"
+                                className="h-[90vh] bg-cyan-100"
+                                style={{backgroudColor: phrases.color}}
                                 key={i}
                             >
                                 <div className=" pt-[15%] pl-[15%] w-60 text-3xl font-bold dark:text-teal-600/70 text-black z-90 sticky top-[100px] sm:w-150 sm:text-6xl font-display">
-                                    {phrases[i]}
+                                    {phrases.text}
 
                                     {i == 0 && (
                                         <div className="mt-3 w-60 flex justify-between">
-                                            <button 
+                                            <button
                                                 className="text-lg text-black h-10 p-2 bg-teal-600/50 rounded-lg hover:bg-teal-600/90 dark:text-white"
-                                                onClick={()=>{playSong();}}
+                                                onClick={() => { playSong(); }}
                                             >
                                                 Play a song
                                             </button>
-                                            <button className="text-lg text-black h-10 p-2 rounded-lg outline outline-teal-800 hover:bg-teal-600/90 dark:text-white m-3">
+                                            <button className="text-lg text-black h-10 p-2 rounded-lg outline outline-teal-800 hover:bg-teal-600/90 dark:text-white">
                                                 Say Someting
                                             </button>
                                             {/* <div className="display-none">
