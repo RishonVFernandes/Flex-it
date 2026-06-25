@@ -188,7 +188,7 @@ const PortfolioPage = () => {
                     <div className="" style={{ height: "60px" }}>
                         {phrases.map((phrases, i) => (
                             <section
-                                className="h-[90vh] bg-cyan-100"
+                                className="h-[90vh]"
                                 style={{backgroudColor: phrases.color}}
                                 key={i}
                             >
